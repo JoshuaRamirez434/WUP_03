@@ -1,7 +1,7 @@
 ---
 title: "Alcohol vs Seat choice"
-author: "Joshua Ramirez
-date: "Fall 2020"
+author: "Joshua Ramirez"
+date: "Summer 2024"
 output: html_document
 ---
 
@@ -14,9 +14,53 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+#Introduction
+Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
+ you choose to sit in??
+ 
+ The data came from UCDavis 
 
+$H_0$: There is no difference between the average number of drinks imbibed between people conditioned on the row they sit in.
+
+
+$H_A$: The average number drinks is different between at least two rows.   
+
+#Methods
+In the data set is a categorical variable, alcohol is numerical
+
+We try to predict alcohol - seat sp we use the Numerical - Categorical helper file
+
+#Results
+
+
+###Descriptive Results
+
+
+###Graphical summary
+
+```{r}
+basicCN <- ggplot(davisdata,aes(x=Seat,y=alcohol))
+
+basicCN + geom_boxplot()
+```
+
+This graph shows..
+
+
+##Numerical Summary
+
+```{r}
+favstats(alcohol~Seat,data=ucdavis1)
+```
+The numerical summary shows that 
+
+##Inferential Results
+
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+The p- value is 0.000006, less than 0.05 so we can reject the null hypotheses
 ## Now with ggplot - first select the basic data
 
 ```{r}
@@ -35,7 +79,7 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
-## Numerical Summarys 
+## Numerical summarys 
 
 ## Inferential Tests
 
